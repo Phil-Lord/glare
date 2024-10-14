@@ -19,7 +19,7 @@ export default function TabLayout() {
 				options={{
 					title: 'Home',
 					tabBarIcon: ({ color, focused }) => (
-						<TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+						<TabBarIcon name={focused ? 'sunny' : 'sunny-outline'} color={color} />
 					),
 				}}
 			/>
@@ -28,7 +28,7 @@ export default function TabLayout() {
 				options={{
 					title: 'Articles',
 					tabBarIcon: ({ color, focused }) => (
-						<TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+						<TabBarIcon name={focused ? 'newspaper' : 'newspaper-outline'} color={color} />
 					),
 				}}
 			/>
