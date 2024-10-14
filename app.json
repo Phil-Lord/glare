@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Glare",
-    "slug": "Glare",
+    "name": "glare",
+    "slug": "glare",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
