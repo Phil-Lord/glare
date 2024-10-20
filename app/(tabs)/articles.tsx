@@ -1,10 +1,15 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+
+import { ThemedText } from '@/components/ThemedText';
+import { ThemedView } from '@/components/ThemedView';
 
 export default function ArticlesScreen() {
 	return (
-		<View style={styles.container}>
-			<Text style={styles.title}>Articles</Text>
-		</View>
+		<ThemedView style={styles.container}>
+			<ThemedView style={styles.titleContainer}>
+				<ThemedText type='title'>Articles</ThemedText>
+			</ThemedView>
+		</ThemedView>
 	)
 }
 
@@ -13,11 +18,14 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#f8f8ff',
 	},
-	title: {
-		fontSize: 24,
-		fontWeight: 'bold',
-		marginBottom: 20,
+	titleContainer: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		gap: 8,
 	},
+	bodyContainer: {
+		gap: 8,
+		marginBottom: 8,
+	}
 });
