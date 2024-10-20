@@ -1,10 +1,14 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { ThemedText } from '@/components/ThemedText';
+import { ThemedView } from '@/components/ThemedView';
+import { StyleSheet } from 'react-native';
 
 export default function HomeScreen() {
 	return (
-		<View style={styles.container}>
-			<Text style={styles.title}>Glare</Text>
-		</View>
+		<ThemedView style={styles.container}>
+			<ThemedView style={styles.titleContainer}>
+				<ThemedText type='title'>Glare</ThemedText>
+			</ThemedView>
+		</ThemedView>
 	);
 }
 
@@ -13,11 +17,10 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#f8f8ff',
 	},
-	title: {
-		fontSize: 24,
-		fontWeight: 'bold',
-		marginBottom: 20,
-	},
+	titleContainer: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		gap: 8,
+	}
 });
