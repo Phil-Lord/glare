@@ -4,7 +4,6 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import UvIndex from '@/components/UvIndex';
 
-
 export default function HomeScreen() {
 	return (
 		<ThemedView style={styles.container}>
