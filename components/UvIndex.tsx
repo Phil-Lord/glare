@@ -1,9 +1,11 @@
+import { ActivityIndicator, FlatList, StyleSheet } from 'react-native';
 import { useEffect, useState } from 'react';
 
 import { fetchWeatherApi } from 'openmeteo';
 import 'text-encoding';
 
 import { ThemedText } from "./ThemedText";
+import { ThemedView } from './ThemedView';
 
 type Index = {
 	id: string,
@@ -63,3 +65,25 @@ export default function UvIndex() {
 		getUvIndex();
 	}, []);
 
+	return <ThemedView style={styles.container}>
+		{isLoading ? (
+			<ActivityIndicator />
+		) : (
+			<FlatList
+				data={data}
+				keyExtractor={({ id }) => id}
+				renderItem={({ item }) => (
+					<ThemedText>{item.time}, {item.uvIndex}</ThemedText>
+				)}
+			/>
+		)}
+	</ThemedView>
+}
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+	}
+});
