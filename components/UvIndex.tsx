@@ -10,7 +10,7 @@ import { ThemedView } from './ThemedView';
 type Index = {
 	id: string,
 	time: string;
-	uvIndex: number;
+	uvIndex: string;
 };
 
 export default function UvIndex() {
@@ -57,7 +57,7 @@ export default function UvIndex() {
 			const timeToIndex = weatherData.hourly.time.map((date, i) => ({
 				id: String(i),
 				time: date.toLocaleString(undefined, options),
-				uvIndex: weatherData.hourly.uvIndex[i]
+				uvIndex: weatherData.hourly.uvIndex[i].toFixed(2)
 			}))
 
 			setData(timeToIndex);
@@ -80,7 +80,7 @@ export default function UvIndex() {
 				data={data}
 				keyExtractor={({ id }) => id}
 				renderItem={({ item }) => (
-					<ThemedText>{item.time}, {item.uvIndex}</ThemedText>
+					<ThemedText>{item.time}: {item.uvIndex}</ThemedText>
 				)}
 			/>
 		)}
