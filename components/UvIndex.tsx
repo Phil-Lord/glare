@@ -47,9 +47,16 @@ export default function UvIndex() {
 				},
 			};
 
+			const options: Intl.DateTimeFormatOptions = {
+				year: '2-digit',
+				month: '2-digit',
+				day: '2-digit',
+				hour: '2-digit',
+				minute: '2-digit'
+			};
 			const timeToIndex = weatherData.hourly.time.map((date, i) => ({
 				id: String(i),
-				time: date.toISOString(),
+				time: date.toLocaleString(undefined, options),
 				uvIndex: weatherData.hourly.uvIndex[i]
 			}))
 
