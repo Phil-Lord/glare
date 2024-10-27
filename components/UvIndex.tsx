@@ -62,7 +62,7 @@ export default function UvIndex() {
 
 			setData(timeToIndex);
 		} catch (error) {
-			console.log(error);
+			console.log('Error fetching UV index:', error);
 		} finally {
 			setLoading(false);
 		}
