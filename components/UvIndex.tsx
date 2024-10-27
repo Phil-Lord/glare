@@ -28,23 +28,30 @@ export default function UvIndex() {
 	};
 	const url = "https://api.open-meteo.com/v1/forecast";
 
-	const range = (start: number, stop: number, step: number) =>
+	// Helper function to form time ranges.
+	// E.g. start and stop can be UNIX timestamps, with interval being 3600 (an hour).
+	const timeRange = (start: number, stop: number, step: number) =>
 		Array.from({ length: (stop - start) / step }, (_, i) => start + i * step);
 
-	const getUvIndex = async () => {
+	const getHourlyIndicies = async () => {
 		try {
 			const responses = await fetchWeatherApi(url, params);
 			const response = responses[0];
 
 			const utcOffsetSeconds = response.utcOffsetSeconds();
-			const hourly = response.hourly()!;
+
+			// Extract and decode UNIX timestamps and hourly interval (3600)
+			const weatherDataBytes = response.hourly()!;
+			const startTime = Number(weatherDataBytes.time());
+			const endTime = Number(weatherDataBytes.timeEnd());
+			const interval = weatherDataBytes.interval();
+
+			// Create time and UV index arrays
 			const weatherData = {
-				hourly: {
-					time: range(Number(hourly.time()), Number(hourly.timeEnd()), hourly.interval()).map(
-						(t) => new Date((t + utcOffsetSeconds) * 1000)
-					),
-					uvIndex: hourly.variables(0)!.valuesArray()!,
-				},
+				times: timeRange(startTime, endTime, interval).map(
+					(t) => new Date((t + utcOffsetSeconds) * 1000)
+				),
+				uvIndicies: weatherDataBytes.variables(0)!.valuesArray()!
 			};
 
 			const options: Intl.DateTimeFormatOptions = {
@@ -54,13 +61,13 @@ export default function UvIndex() {
 				hour: '2-digit',
 				minute: '2-digit'
 			};
-			const timeToIndex = weatherData.hourly.time.map((date, i) => ({
+			const hourlyIndicies = weatherData.times.map((date, i) => ({
 				id: String(i),
 				time: date.toLocaleString(undefined, options),
-				uvIndex: weatherData.hourly.uvIndex[i].toFixed(2)
+				uvIndex: weatherData.uvIndicies[i].toFixed(2)
 			}))
 
-			setData(timeToIndex);
+			setData(hourlyIndicies);
 		} catch (error) {
 			console.log('Error fetching UV index:', error);
 		} finally {
@@ -69,7 +76,7 @@ export default function UvIndex() {
 	};
 
 	useEffect(() => {
-		getUvIndex();
+		getHourlyIndicies();
 	}, []);
 
 	return <ThemedView style={styles.container}>
