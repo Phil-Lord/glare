@@ -1,11 +1,7 @@
-import { UvFetchResponse } from '../services/uvService';
+import { UvFetchResponse } from '../types/uv';
+import { UvData } from '../types/uv';
 
-interface uvData {
-	time: string,
-	uvIndex: number
-}
-
-const formatUvData = (data: UvFetchResponse): uvData[] => {
+const formatUvData = (data: UvFetchResponse): UvData[] => {
 	const hourlyUvData = data.hourly;
 	const times = hourlyUvData.time;
 	const uvIndicies = hourlyUvData.uv_index;
@@ -13,7 +9,7 @@ const formatUvData = (data: UvFetchResponse): uvData[] => {
 	return times.map((time, i) => ({
 		time,
 		uvIndex: uvIndicies[i]
-	}) as uvData);
+	}) as UvData);
 }
 
 export default formatUvData;
