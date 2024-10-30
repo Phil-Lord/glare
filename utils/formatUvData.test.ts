@@ -1,13 +1,36 @@
 import formatUvData from './formatUvData';
-import fetchUvData from "@/services/uvService";
+import { UvFetchResponse } from '@/types/uv';
 
 describe('formatUvData', () => {
+	const mockUvFetchResponse: UvFetchResponse = {
+		latitude: 0.0,
+		longitude: 0.0,
+		generationtime_ms: 0.0,
+		utc_offset_seconds: 0,
+		timezone: 'Europe/London',
+		timezone_abbreviation: 'GMT',
+		elevation: 10.0,
+		hourly_units: {
+			time: 'iso8601',
+			uv_index: ''
+		},
+		hourly: {
+			time: ['2024-10-30T12:00', '2024-10-30T13:00'],
+			uv_index: [1.50, 1.00]
+		}
+	}
+
 	it('should format data correctly', async () => {
-		const expectedOutput = [{ time: '2024-10-29 00:00', index: 1 }];
+		// Given
+		const expectedOutput = [
+			{ time: '2024-10-30T12:00', uvIndex: 1.50 },
+			{ time: '2024-10-30T13:00', uvIndex: 1.00 }
+		];
 
-		const data = await fetchUvData();
+		// When
+		const result = formatUvData(mockUvFetchResponse);
 
-		const result = formatUvData(data);
+		// Then
 		expect(result).toEqual(expectedOutput);
 	})
 })
