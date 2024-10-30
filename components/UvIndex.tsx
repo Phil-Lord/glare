@@ -5,8 +5,8 @@ import 'text-encoding';
 
 import fetchUvData from '@/services/uvService';
 import formatUvData from '@/utils/formatUvData';
-import { ThemedText } from "../theme/ThemedText";
-import { ThemedView } from '../theme/ThemedView';
+import { ThemedText } from "./theme/ThemedText";
+import { ThemedView } from './theme/ThemedView';
 import { UvData } from '@/types/uv';
 
 // TODO: Make the list show in the middle of the screen.
