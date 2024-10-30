@@ -13,7 +13,7 @@ type Index = {
 	uvIndex: string;
 };
 
-export default function UvIndex() {
+const UvIndex = () => {
 	const [isLoading, setLoading] = useState(true);
 	const [data, setData] = useState<Index[]>([]);
 
@@ -101,3 +101,5 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	}
 });
+
+export default UvIndex;
