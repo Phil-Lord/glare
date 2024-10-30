@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import UvIndex from '@/components/UvIndex';
+import UvIndex from '@/components/UvIndex/UvIndex';
 
 export default function HomeScreen() {
 	return (
